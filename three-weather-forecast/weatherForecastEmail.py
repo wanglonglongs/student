@@ -9,8 +9,7 @@ import schedule
 import time
 
 class sendEmail:
-    def __init__(self, recipient: str, sender: str = "wanglonglongiii@163.com", password: str = "IPNXYLLGGCSBPTKH",
-                 serverAddress: str = 'smtp.163.com'):
+    def __init__(self, recipient: str, sender: str = "wanglonglongiii@163.com", password: str = "IPNXYLLGGCSBPTKH",serverAddress: str = 'smtp.163.com'):
         """
             recipient: 接收者邮箱
             sender:    发送者邮箱

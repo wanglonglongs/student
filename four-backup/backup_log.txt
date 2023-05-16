@@ -1,0 +1,11 @@
+INFO:root:文件大小为：1066820kb,备份时间为：2023-05-16 14:13:43,源文件地址为: F:\photo, 备份文件地址为: F:\imager,压缩文件地址为：F:\backup\backup.zip
+INFO:root:文件大小为：1066820kb,备份时间为：2023-05-16 14:13:58,源文件地址为: F:\photo, 备份文件地址为: F:\imager,压缩文件地址为：F:\backup\backup.zip
+INFO:root:文件大小为：1066820kb,备份时间为：2023-05-16 14:14:10,源文件地址为: F:\photo, 备份文件地址为: F:\imager,压缩文件地址为：F:\backup\backup.zip
+INFO:root:文件大小为：1066820kb,备份时间为：2023-05-16 14:15:22,源文件地址为: F:\photo, 备份文件地址为: F:\imager,压缩文件地址为：F:\backup\backup.zip
+INFO:root:文件大小为：1066820kb,备份时间为：2023-05-16 14:15:54,源文件地址为: F:\photo, 备份文件地址为: F:\imager,压缩文件地址为：F:\backup\backup.zip
+INFO:root:文件大小为：1066820kb,备份时间为：2023-05-16 14:16:52,源文件地址为: F:\photo, 备份文件地址为: F:\imager,压缩文件地址为：F:\backup\backup.zip
+INFO:root:文件大小为：1066820kb,备份时间为：2023-05-16 14:16:59,源文件地址为: F:\photo, 备份文件地址为: F:\imager,压缩文件地址为：F:\backup\backup.zip
+INFO:root:文件大小为：1066820kb,备份时间为：2023-05-16 14:17:35,源文件地址为: F:\photo, 备份文件地址为: F:\imager,压缩文件地址为：F:\backup\backup.zip
+INFO:root:文件大小为：1066820kb,备份时间为：2023-05-16 14:21:12,源文件地址为: F:\photo, 备份文件地址为: F:\imager,压缩文件地址为：F:\backup\backup.zip
+INFO:root:文件大小为：1066820kb,备份时间为：2023-05-16 14:22:23,源文件地址为: F:\photo, 备份文件地址为: F:\imager,压缩文件地址为：F:\backup\backup.zip
+INFO:root:文件大小为：1066820kb,备份时间为：2023-05-16 14:44:25,源文件地址为: F:\photo, 备份文件地址为: F:\imager,压缩文件地址为：F:\backup\backup.zip
