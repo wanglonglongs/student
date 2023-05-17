@@ -8,6 +8,7 @@ from weather_forecast import final
 import schedule
 import time
 
+
 class sendEmail:
     def __init__(self, recipient: str, sender: str = "wanglonglongiii@163.com", password: str = "IPNXYLLGGCSBPTKH",serverAddress: str = 'smtp.163.com'):
         """
@@ -95,7 +96,7 @@ def send_weather_email():
     """
 
 # 设置定时任务，每天的特定时间执行send_weather_email函数
-schedule.every().day.at("08:00").do(send_weather_email)
+schedule.every().day.at("09:30").do(send_weather_email)
 
 while True:
     # 检查是否有定时任务需要执行
