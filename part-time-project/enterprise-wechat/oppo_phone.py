@@ -72,7 +72,7 @@ def open_screen():
 
 
 # 添加定时任务
-scheduler.add_job(open_screen,'cron', day_of_week='mon-fri', hour=18, minute=30, second=0) # 设定每天早上 8.15 点唤醒屏幕
+scheduler.add_job(open_screen,'cron', day_of_week='mon-fri', hour=18, minute=30) # 设定每天早上 8.15 点唤醒屏幕
 
 # 启动调度器
 scheduler.start()
