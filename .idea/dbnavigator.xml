@@ -8,12 +8,12 @@
   <component name="DBNavigator.Project.DatabaseBrowserManager">
     <autoscroll-to-editor value="false" />
     <autoscroll-from-editor value="true" />
-    <show-object-properties value="true" />
+    <show-object-properties value="false" />
     <loaded-nodes />
   </component>
   <component name="DBNavigator.Project.DatabaseConsoleManager">
     <connection id="726290c3-0750-4157-8cf7-3989b881e3d8">
-      <console name="Connection" type="STANDARD" schema="mydatabase" session="Main"><![CDATA[select * from emails]]></console>
+      <console name="Connection" type="STANDARD" schema="mydatabase" session="Main"><![CDATA[select * from backup_recording]]></console>
     </connection>
   </component>
   <component name="DBNavigator.Project.DatabaseEditorStateManager">
@@ -21,6 +21,9 @@
   </component>
   <component name="DBNavigator.Project.DatabaseFileManager">
     <open-files />
+  </component>
+  <component name="DBNavigator.Project.DatasetFilterManager">
+    <filter-actions connection-id="726290c3-0750-4157-8cf7-3989b881e3d8" dataset="mydatabase.backup_recording" active-filter-id="" />
   </component>
   <component name="DBNavigator.Project.ExecutionManager">
     <retain-sticky-names value="false" />

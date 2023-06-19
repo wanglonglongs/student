@@ -80,12 +80,14 @@ def send_weather_email():
     # 拉取当天的天气状况
     # 实例化对象，传入接收者邮箱参数recipient
     p1 = sendEmail(recipient="wanglonglongiii@163.com")
-    p2 = sendEmail(recipient="1367446518@qq.com")
+    p2 = sendEmail(recipient="382909759@qq.com")
+    p3 = sendEmail(recipient="2139165110@qq.com")
     title = "天气提醒~祝您一天好心情哦"
     text = f"您好，当前日期为{final[0][0]}，天气状况:{final[0][1]},最高温度：{final[0][2]}，最低温度：{final[0][3]}，记得穿合适的衣服呢！" \
            f"您要更好地应对天气变化，预防相关天气状况引起的疾病或其他不适。按时上班哦！"
     p1.send(title=title, text=text, name="上海网络有限公司")
-    p2.send(title=title, text=text, name="北京网络有限公司")
+    p2.send(title=title, text=text, name="意大利中文网络有限公司")
+    p3.send(title=title, text=text, name="深圳网络有限公司")
     """
     send参数说明:
         title:  必传  邮件标题
@@ -96,7 +98,7 @@ def send_weather_email():
     """
 
 # 设置定时任务，每天的特定时间执行send_weather_email函数
-schedule.every().day.at("09:30").do(send_weather_email)
+schedule.every().day.at("08:40").do(send_weather_email)
 
 while True:
     # 检查是否有定时任务需要执行
