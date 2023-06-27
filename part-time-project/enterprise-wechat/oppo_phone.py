@@ -1,53 +1,82 @@
 # -*- coding: utf-8 -*-
-import schedule
+import datetime
+import random
 from appium import webdriver
 import time
 from apscheduler.schedulers.blocking import BlockingScheduler
 import subprocess
+import smtplib
+from email.mime.multipart import MIMEMultipart
+from email.mime.text import MIMEText
+from email.mime.image import MIMEImage
 
 # 创建调度器实例
 scheduler = BlockingScheduler()
 
 
+def send_email():
+    # Email configuration
+    sender_email = 'wanglonglongiii@163.com'
+    receiver_email = '1367446518@qq.com'
+    password = 'IPNXYLLGGCSBPTKH'
+
+    # Create a multipart message and set headers
+    message = MIMEMultipart()
+    message['From'] = f'AutoClock <{sender_email}>'
+    message['To'] = receiver_email
+    message['Subject'] = '今日打卡情况,请查收'
+
+    # Attach the screenshot to the email
+    with open('screenshot.png', 'rb') as f:
+        image_data = f.read()
+    image = MIMEImage(image_data, name='screenshot.png')
+    message.attach(image)
+
+    # 获取当前日期和时间
+    current_datetime = datetime.datetime.now()
+    # 格式化当前日期和时间为字符串
+    current_datetime_str = current_datetime.strftime('%Y-%m-%d %H:%M:%S')
+
+    # Add text content to the email
+    text = f"""
+        当前时间为:   {current_datetime_str}   
+        请查看打卡截图,确保已成功打卡。
+    """
+    text_part = MIMEText(text, 'plain')
+    message.attach(text_part)
+
+    # Send the email
+    server = smtplib.SMTP('smtp.163.com', 25)
+    server.starttls()
+    server.login(sender_email, password)
+    server.send_message(message)
+    server.quit()
+    print("打卡信息，已发送至邮箱")
+
+
 def enterprise():
-    print("打开手机，驱动企微")
+    print("1，打开手机，驱动企微")
     desired_caps = dict()
     desired_caps['platformName'] = 'Android'  # 可以写成android
-    desired_caps['platformVersion'] = '6.0.1'  # 11.1.0等都可以写成11
-    desired_caps['deviceName'] = 'f4c7ce96'  # 设备名字可以随便写，但是不可以为空
+    desired_caps['platformVersion'] = '6.0.1'  # 根据版本号码进行修改
+    desired_caps['deviceName'] = 'f4c7ce96'  # 设备名字可以随便写，可以使用adb命令进行查看
     desired_caps['appPackage'] = 'com.tencent.wework'
     desired_caps['appActivity'] = 'com.tencent.wework.launch.LaunchSplashActivity'
     desired_caps['skipServerInstallation'] = True
-    desired_caps["noReset"] = True
+    desired_caps["noReset"] = True  # 保存设备的缓存信息
     driver = webdriver.Remote('http://localhost:4723/wd/hub', desired_caps)
-    print("执行start----------")
-    time.sleep(10)  # 等待5秒"
+    print("已驱动企业微信")
+    time.sleep(15)  # 等待5秒"
 
-    # 进入工作台页面
-    # 脆弱xpath
-    driver.find_element(by='xpath',value="/hierarchy/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.widget.LinearLayout/android.view.ViewGroup/android.widget.RelativeLayout[4]/android.widget.RelativeLayout/android.widget.TextView").click()
-    time.sleep(2)
+    # 截图
+    driver.save_screenshot("screenshot.png")
 
-    # [控制台] 页面下滑·1
-    driver.swipe(350,1000,350,500, 1200)
+    # Send the screenshot via email
+    print("2.发动打卡信息")
+    send_email()
 
-    # 打卡按钮 进入打卡页面
-    driver.find_element(by='xpath',value='/hierarchy/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.widget.FrameLayout[2]/android.widget.RelativeLayout/android.view.ViewGroup/androidx.recyclerview.widget.RecyclerView/android.widget.RelativeLayout[7]/android.widget.LinearLayout/android.widget.RelativeLayout/android.widget.ImageView').click()
-    time.sleep(3)
-
-    # 校验是否已经打卡
-    expected_title = "上班打卡"
-    actual_title = driver.find_element(by='id', value='com.tencent.wework:id/b3x').text
-    print(actual_title)
-    time.sleep(2)
-    if actual_title == expected_title:
-        print("未打卡，执行打卡操作")
-        driver.tap([(366, 782)], 500)
-        print("打卡成功")
-    else:
-        print("已经打卡")
-    print("执行end----------")
     driver.quit()
+    print("企业微信已退出")
 
 
 def open_screen():
@@ -69,17 +98,15 @@ def open_screen():
     time.sleep(5)
 
     subprocess.call(cmd3, shell=True)
+    print("程序运行结束，需查看邮箱"+f"    时间:{datetime.datetime.now()}")
 
 
 # 添加定时任务
-scheduler.add_job(open_screen,'cron', day_of_week='mon-fri', hour=18, minute=30) # 设定每天早上 8.15 点唤醒屏幕
-
+minute = random.randint(10,29)
+scheduler.add_job(open_screen, 'cron', day_of_week='mon-fri', hour=8, minute=minute)  # 预设定每天早上唤醒屏幕(除却周六日)
 # 启动调度器
 scheduler.start()
-
 
 if __name__ == '__main__':
     while True:
         time.sleep(1)
-
-
