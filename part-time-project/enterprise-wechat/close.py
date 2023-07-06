@@ -6,25 +6,25 @@ from apscheduler.schedulers.blocking import BlockingScheduler
 import subprocess
 
 # 创建调度器实例
-scheduler = BlockingScheduler()
-
-
-def enterprise():
-    print("打开手机，驱动企微")
-    desired_caps = dict()
-    desired_caps['platformName'] = 'Android'  # 可以写成android
-    desired_caps['platformVersion'] = '6.0.1'  # 等都可以写成11
-    desired_caps['deviceName'] = 'f4c7ce96'  # 设备名字可以随便写，但是不可以为空
-    desired_caps['appPackage'] = 'com.tencent.wework'
-    desired_caps['appActivity'] = 'com.tencent.wework.launch.LaunchSplashActivity'
-    desired_caps['skipServerInstallation'] = True
-    desired_caps["noReset"] = True
-    driver = webdriver.Remote('http://localhost:4723/wd/hub', desired_caps)
-    print("执行start----------")
-    time.sleep(20)  # 等待5秒"
-
-    # 截图
-    driver.save_screenshot("screenshot.png")
+# scheduler = BlockingScheduler()
+#
+#
+# def enterprise():
+#     print("打开手机，驱动企微")
+#     desired_caps = dict()
+#     desired_caps['platformName'] = 'Android'  # 可以写成android
+#     desired_caps['platformVersion'] = '6.0.1'  # 等都可以写成11
+#     desired_caps['deviceName'] = 'f4c7ce96'  # 设备名字可以随便写，但是不可以为空
+#     desired_caps['appPackage'] = 'com.tencent.wework'
+#     desired_caps['appActivity'] = 'com.tencent.wework.launch.LaunchSplashActivity'
+#     desired_caps['skipServerInstallation'] = True
+#     desired_caps["noReset"] = True
+#     driver = webdriver.Remote('http://localhost:4723/wd/hub', desired_caps)
+#     print("执行start----------")
+#     time.sleep(20)  # 等待5秒"
+#
+#     # 截图
+#     driver.save_screenshot("screenshot.png")
 
     # # 进入工作台页面
     # # 脆弱xpath
@@ -50,8 +50,8 @@ def enterprise():
     # else:
     #     print("已经打卡")
     # print("执行end----------")
-    driver.quit()
-    print("执行end----------")
+    # driver.quit()
+    # print("执行end----------")
 
 
 def open_screen():
@@ -66,23 +66,20 @@ def open_screen():
     time.sleep(2)
 
     subprocess.call(cmd2, shell=True)
-    time.sleep(5)
 
     # 调用 epterprise-wechat
-    enterprise()
-    time.sleep(5)
+    # enterprise()
 
     subprocess.call(cmd3, shell=True)
 
-
-# 添加定时任务
-scheduler.add_job(open_screen,'cron', day_of_week='mon-fri', hour=8, minute=18) # 预设定每天早上 8.20 点唤醒屏幕(除却周六日)
-# 启动调度器
-scheduler.start()
+#
+# # 添加定时任务
+# scheduler.add_job(open_screen,'cron', day_of_week='mon-fri', hour=8, minute=18) # 预设定每天早上 8.20 点唤醒屏幕(除却周六日)
+# # 启动调度器
+# scheduler.start()
 
 
 if __name__ == '__main__':
-    while True:
-        time.sleep(1)
+    open_screen()
 
 

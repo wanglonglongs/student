@@ -103,10 +103,11 @@ def open_screen():
 
 # 添加定时任务
 minute = random.randint(10,29)
+print(minute)
 scheduler.add_job(open_screen, 'cron', day_of_week='mon-fri', hour=8, minute=minute)  # 预设定每天早上唤醒屏幕(除却周六日)
 # 启动调度器
 scheduler.start()
 
 if __name__ == '__main__':
     while True:
-        time.sleep(1)
+        time.sleep(2)
